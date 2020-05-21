@@ -42,7 +42,6 @@ class User extends ActiveRecord implements IdentityInterface
             [['username'], 'string', 'max' => 32],
             [['email'], 'email'],
             [['password'], 'string', 'min' => 8, 'max' => 32],
-            
         ];
     }
     
@@ -115,8 +114,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password): bool
     {
-        $security = \Yii::$app->security;
-        return $security->validatePassword($password, $this->password);
+        return \Yii::$app->security->validatePassword($password, $this->password_hash);
     }
     
     /**

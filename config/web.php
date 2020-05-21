@@ -5,6 +5,7 @@ $dotenv->load();
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/database/mysql.php';
+$urls = require __DIR__ . '/urls.php';
 
 $config = [
     'id' => 'basic',
@@ -27,60 +28,21 @@ $config = [
                 'application/json' => \yii\web\JsonParser::class,
             ]
         ],
-        /*
-        'cache' => [
-            'class' => \yii\caching\FileCache::class,
+        'response' => [
+            'format' => \yii\web\Response::FORMAT_JSON,
         ],
-        */
         'user' => [
             'identityClass' => \app\models\User::class,
+            'enableSession' => false,
             'enableAutoLogin' => true,
+            'loginUrl' => false,
         ],
-        /*
-        'errorHandler' => [
-            'errorAction' => 'site/error',
-        ],
-        */
-        /*
-        'mailer' => [
-            'class' => \yii\swiftmailer\Mailer::class,
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
-        ],
-        */
-        /*
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => \yii\log\FileTarget::class,
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
-        ],
-        */
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => true,
-            'rules' => [
-                [
-                    'class' => \yii\rest\UrlRule::class,
-                    'prefix' => 'api/',
-                    'controller' => [
-                        'v1/default',
-                        'v1/user'
-                    ],
-                    'tokens' => [
-                        '{id}' => '<id:[\w-]+>',
-                    ]
-                ],
-                'GET,POST <controller:[\w-]+>/<action:[index|create]>',
-                'GET,PUT,DELETE  <controller:[\w-]+>/<action:[view|update|delete]>/<{id}>',
-            ],
+            'rules' => $urls,
         ],
         
     ],
