@@ -70,7 +70,7 @@ class UserController extends ActiveController
             }
         }
         if ($action === 'create') {
-            if (\Yii::$app->user->id === null) {
+            if (\Yii::$app->user->id !== null) {
                 throw new ForbiddenHttpException(sprintf('You cannot %s a user if you are logged in.', $action));
             }
         }

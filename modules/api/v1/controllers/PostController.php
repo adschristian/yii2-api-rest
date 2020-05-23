@@ -49,7 +49,7 @@ class PostController extends ActiveController
             'except' => ['index', 'view', 'search'],
             'auth' => function ($username, $password) {
                 $user = User::find()->where(['username' => $username])->one();
-                if ($user->validatePassword($password)) {
+                if ($user !== null && $user->validatePassword($password)) {
                     return $user;
                 }
                 return null;

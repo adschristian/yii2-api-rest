@@ -16,7 +16,7 @@ use yii\web\IdentityInterface;
  * @property string $auth_key
  * @property string $access_token
  * @property string password_hash
- * @property integer created_at
+ * @property string created_at
  *
  * @property string password
  */
@@ -133,7 +133,7 @@ class User extends ActiveRecord implements IdentityInterface
                 $this->access_token = $security->generateRandomString();
                 
                 $datetime = (new \DateTime('now'));
-                $this->created_at = $datetime->getTimestamp();
+                $this->created_at = (new \DateTime('now'))->format('Y-m-d H:i:s');
             }
             
             $this->password_hash = $security->generatePasswordHash($this->password);

@@ -67,6 +67,8 @@ class PostSearch extends Post
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'slug', $this->slug])
             ->andFilterWhere(['like', 'body', $this->body])
+            ->andFilterWhere(['>=', 'created_at', $this->date_from])
+            ->andFilterWhere(['<', 'created_at', $this->date_to])
             ->andFilterWhere(['=', 'created_by', $this->created_by]);
 
         return $dataProvider;

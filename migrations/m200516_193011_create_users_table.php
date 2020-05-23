@@ -21,7 +21,7 @@ class m200516_193011_create_users_table extends Migration
             'password_hash' => $this->string(255)->notNull(),
             'auth_key' => $this->string(255)->notNull(),
             'access_token' => $this->string(255)->notNull(),
-            'created_at' => $this->integer()->notNull()
+            'created_at' => $this->dateTime()->notNull()
         ]);
         
         $this->createIndex('idx_users_username', self::tableName, ['username'], true);

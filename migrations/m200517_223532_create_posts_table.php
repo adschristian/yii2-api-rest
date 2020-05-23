@@ -20,7 +20,7 @@ class m200517_223532_create_posts_table extends Migration
             'slug' => $this->string(64)->notNull(),
             'body' => $this->text()->notNull(),
             'created_by' => $this->char(36)->notNull(),
-            'created_at' => $this->integer()->notNull(),
+            'created_at' => $this->dateTime()->notNull(),
         ]);
         
         $this->addPrimaryKey('pk_posts', self::tableName, ['id']);
